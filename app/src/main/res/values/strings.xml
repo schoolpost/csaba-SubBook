@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">csaba-SubBook</string>
     <string name="addButton">ADD</string>
-
+    <string name="totalValue">$5000.00</string>
 </resources>

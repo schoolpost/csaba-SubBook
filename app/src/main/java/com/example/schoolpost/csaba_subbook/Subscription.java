@@ -56,7 +56,9 @@ public class Subscription {
      * @return String subscription date.
      */
 
-    public String getDate() { return date; }
+    public String getDate() {
+        return date;
+    }
 
     /**
      * Sets the subscription date.
@@ -84,7 +86,9 @@ public class Subscription {
      * @param cost subscription cost.
      */
 
-    public void setCost(String cost) { this.cost = cost; }
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
 
     /**
      * Gets the subscription comment.

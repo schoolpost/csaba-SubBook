@@ -44,6 +44,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+//    Concepts and structure sourced from https://www.youtube.com/watch?v=3QHgJnPPnqQ&t=1227s
+
     private static final String FILENAME = "sub_list.sav";
     private ListView listView;
     private ArrayList<Subscription> subscriptions;

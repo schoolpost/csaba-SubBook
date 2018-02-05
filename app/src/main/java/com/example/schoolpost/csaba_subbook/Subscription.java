@@ -50,7 +50,10 @@ public class Subscription {
     }
 
     public String toString() {
-        return name + " | " + date + " | " + cost + " | " + comment;
+
+        Float cst = Float.parseFloat(cost);
+
+        return "Name: " + name + " \n" + "Date: " + date + " \n" + "Cost: $" + String.format("%.2f", cst);
     }
 
 }

@@ -107,9 +107,12 @@ public class MainActivity extends AppCompatActivity {
             String cost = data.getStringExtra(Intent_Constants.SUBSCRIPTION_COST_FIELD_EDIT);
             String comment = data.getStringExtra(Intent_Constants.SUBSCRIPTION_COMMENT_FIELD_EDIT);
             int index = data.getIntExtra(Intent_Constants.SUBSCRIPTION_INDEX, -1);
-            Subscription sub = new Subscription(name, date, cost, comment);
-            subscriptions.remove(index);
-            subscriptions.add(sub);
+
+            subscriptions.get(index).setName(name);
+            subscriptions.get(index).setDate(date);
+            subscriptions.get(index).setCost(cost);
+            subscriptions.get(index).setComment(comment);
+
             calcTotal();
             adapter.notifyDataSetChanged();
             saveInFile();

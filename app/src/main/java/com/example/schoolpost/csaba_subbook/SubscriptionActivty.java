@@ -27,6 +27,11 @@ public class SubscriptionActivty extends AppCompatActivity {
                 String date = ((EditText) findViewById(R.id.dateField)).getText().toString();
                 String cost = ((EditText) findViewById(R.id.costField)).getText().toString();
                 String comment = ((EditText) findViewById(R.id.commentField)).getText().toString();
+
+                if (cost.length() != 0) {
+                    Float cst = Float.parseFloat(cost);
+                    cost = String.format("%.2f", cst);
+                }
                 if (validateName(name) && validateDate(date) && validateCost(cost) && validateComment(comment)) {
                     Intent intentSave = new Intent();
                     intentSave.putExtra(Intent_Constants.SUBSCRIPTION_NAME_FIELD, name);

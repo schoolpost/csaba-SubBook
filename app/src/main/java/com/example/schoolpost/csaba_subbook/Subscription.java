@@ -38,6 +38,8 @@ public class Subscription {
     }
 
     public void setCost(String cost) {
+
+
         this.cost = cost;
     }
 
@@ -51,9 +53,7 @@ public class Subscription {
 
     public String toString() {
 
-        Float cst = Float.parseFloat(cost);
-
-        return "Name: " + name + " \n" + "Date: " + date + " \n" + "Cost: $" + String.format("%.2f", cst);
+        return "Name: " + name + " \n" + "Date: " + date + " \n" + "Cost: $" + cost;
     }
 
 }

@@ -1,3 +1,13 @@
+/*
+ * Main Activity
+ *
+ * Version 1.0
+ *
+ * 2/5/2018
+ *
+ * Copyright (c) 2018.
+ */
+
 package com.example.schoolpost.csaba_subbook;
 
 import android.content.Context;
@@ -25,6 +35,13 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * Represents the main activty of the application.
+ *
+ * @author csabanagy
+ * @version 1.0
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String FILENAME = "sub_list.sav";
@@ -33,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<Subscription> adapter;
     private static float totalCost = 0.0f;
     private TextView summaryCost;
+
+    /**
+     * Initializes the UI Elements and creates an empty listview to hold the subscriptions.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<Subscription>(this, R.layout.list_item, subscriptions);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            /**
+             * When a list item is clicked.
+             * @param adapterView adapterview
+             * @param view view
+             * @param i item index
+             * @param l item index
+             */
+
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent();
@@ -59,7 +89,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         addButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when the add button is clicked.
+             */
             @Override
             public void onClick(View view) {
                 addSubscription(view);
@@ -69,6 +103,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Invoked when the add button is pressed and creates a new intent.
+     *
+     * @param view view object
+     */
+
 
     public void addSubscription(View view) {
         Intent intentAdd = new Intent();
@@ -76,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intentAdd, Intent_Constants.INTENT_REQUEST_CODE);
 
     }
+
+    /**
+     * Iterates through the subscriptions array and calculates the total cost.
+     */
 
     public void calcTotal() {
         Float sum = 0.0f;
@@ -86,6 +130,15 @@ public class MainActivity extends AppCompatActivity {
         summaryCost.setText("$" + String.format("%.2f", totalCost));
 
     }
+
+    /**
+     * Represents the callback function when an Intent returns a result to the current activity.
+     * Handles different tasks based on intent result codes.
+     *
+     * @param requestCode intent request code
+     * @param resultCode  intent result code
+     * @param data        intent data
+     */
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -129,6 +182,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Called at the start of the app, loads the GSON from file,
+     * calculates the sum of the subscription costs and populates the
+     * listview with the subscription objects.
+     */
+
     @Override
     protected void onStart() {
 
@@ -141,23 +200,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void clear() {
-        try {
-            FileOutputStream fos = openFileOutput(FILENAME,
-                    Context.MODE_PRIVATE);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-
-            Gson gson = new Gson();
-            gson.toJson(new ArrayList<Subscription>(), out);
-            out.flush();
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException();
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
-
-    }
+    /**
+     * Loads the GSON file into a subscription arraylist.
+     */
 
     private void loadFromFile() {
 
@@ -183,6 +228,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Saves the subscriptions GSON into a file.
+     */
+
     private void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME,
@@ -200,6 +249,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Called when activity is destroyed.
+     */
 
     @Override
     protected void onDestroy() {

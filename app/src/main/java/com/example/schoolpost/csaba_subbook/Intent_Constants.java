@@ -1,7 +1,20 @@
+/*
+ * Intent Constants
+ *
+ * Version 1.0
+ *
+ * 2/5/2018
+ *
+ * Copyright (c) 2018.
+ */
+
 package com.example.schoolpost.csaba_subbook;
 
 /**
- * Created by Schoolpost on 2018-02-04.
+ * Represents intent constants used between activities.
+ *
+ * @author csabanagy
+ * @version 1.0
  */
 
 public class Intent_Constants {

@@ -1,3 +1,13 @@
+/*
+ * Subscription Activty
+ *
+ * Version 1.0
+ *
+ * 2/5/2018
+ *
+ * Copyright (c) 2018.
+ */
+
 package com.example.schoolpost.csaba_subbook;
 
 import android.content.Intent;
@@ -10,7 +20,20 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
+/**
+ * Represents the subscription add activity.
+ *
+ * @author csabanagy
+ * @version 1.0
+ * @see MainActivity
+ * @see SubscriptionEditActivity
+ */
+
 public class SubscriptionActivty extends AppCompatActivity {
+
+    /**
+     * Initializes the UI Elements with empty text fields.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +80,13 @@ public class SubscriptionActivty extends AppCompatActivity {
 
     }
 
+    /**
+     * Validates the name field. Up to 20 Characters and cannot be empty.
+     *
+     * @param name subscription name.
+     * @return true if valid.
+     */
+
     private Boolean validateName(String name) {
         if (name.length() > 20) {
             Toast.makeText(getApplicationContext(), "Name is too long! ( 20 character limit )", Toast.LENGTH_SHORT).show();
@@ -67,6 +97,13 @@ public class SubscriptionActivty extends AppCompatActivity {
         }
         return true;
     }
+
+    /**
+     * Validates the cost field. No negative values and cannot be empty.
+     *
+     * @param cost subscription cost.
+     * @return true if valid.
+     */
 
     private Boolean validateCost(String cost) {
         if (cost.length() == 0) {
@@ -87,6 +124,13 @@ public class SubscriptionActivty extends AppCompatActivity {
         }
     }
 
+    /**
+     * Validates the date field. must match the format yyyy-MM-dd and cannot be empty.
+     *
+     * @param date subscription date.
+     * @return true if valid.
+     */
+
     private Boolean validateDate(String date) {
         if (date.length() == 0) {
             Toast.makeText(getApplicationContext(), "Enter a date!", Toast.LENGTH_SHORT).show();
@@ -102,6 +146,13 @@ public class SubscriptionActivty extends AppCompatActivity {
             return false;
         }
     }
+
+    /**
+     * Validates the comment field. Up to 30 characters.
+     *
+     * @param comment subscription comment.
+     * @return true if valid.
+     */
 
     private Boolean validateComment(String comment) {
         if (comment.length() > 30) {

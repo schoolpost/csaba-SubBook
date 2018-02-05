@@ -10,6 +10,7 @@ public class Intent_Constants {
     public final static String SUBSCRIPTION_NAME_FIELD = "name_field";
     public final static String SUBSCRIPTION_DATE_FIELD = "date_field";
     public final static String SUBSCRIPTION_COST_FIELD = "cost_field";
+    public final static String SUBSCRIPTION_COMMENT_FIELD = "comment_field";
 
 
 }

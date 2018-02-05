@@ -1,27 +1,18 @@
 package com.example.schoolpost.csaba_subbook;
 
-import java.util.Date;
-
 /**
  * Created by schoo on 1/29/2018.
  */
 
 public class Subscription {
     private String name;
-    private Date date;
-    private float cost;
+    private String date;
+    private String cost;
     private String comment;
 
-    Subscription(String name, Date date, float cost, String comment) {
+    Subscription(String name, String date, String cost, String comment) {
         this.name = name;
         this.date = date;
-        this.cost = cost;
-        this.comment = comment;
-    }
-
-    Subscription(String name, float cost, String comment) {
-        this.name = name;
-        this.date = new Date();
         this.cost = cost;
         this.comment = comment;
     }
@@ -30,33 +21,23 @@ public class Subscription {
         return name;
     }
 
-    public void setName(String name) throws SubscriptionNameException {
-        if (name.length() <= 20) {
-            this.name = name;
-        } else {
-            throw new SubscriptionNameException();
-        }
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public float getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(float cost) throws SubscriptionCostException {
-        if (cost >= 0) {
-            this.cost = cost;
-        } else {
-            throw new SubscriptionCostException();
-        }
+    public void setCost(String cost) {
         this.cost = cost;
     }
 
@@ -66,6 +47,10 @@ public class Subscription {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String toString() {
+        return name + " | " + date + " | " + cost + " | " + comment;
     }
 
 }

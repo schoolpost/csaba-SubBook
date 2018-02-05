@@ -48,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent();
+                intent.setClass(MainActivity.this, SubscriptionEditActivity.class);
+                intent.putExtra(Intent_Constants.SUBSCRIPTION_NAME_DATA, subscriptions.get(i).getName());
+                intent.putExtra(Intent_Constants.SUBSCRIPTION_DATE_DATA, subscriptions.get(i).getDate());
+                intent.putExtra(Intent_Constants.SUBSCRIPTION_COST_DATA, subscriptions.get(i).getCost());
+                intent.putExtra(Intent_Constants.SUBSCRIPTION_COMMENT_DATA, subscriptions.get(i).getComment());
+                intent.putExtra(Intent_Constants.SUBSCRIPTION_INDEX, i);
+                startActivityForResult(intent, Intent_Constants.INTENT_REQUEST_CODE_TWO);
 
             }
         });
@@ -83,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Intent_Constants.INTENT_REQUEST_CODE) {
-
             String name = data.getStringExtra(Intent_Constants.SUBSCRIPTION_NAME_FIELD);
             String date = data.getStringExtra(Intent_Constants.SUBSCRIPTION_DATE_FIELD);
             String cost = data.getStringExtra(Intent_Constants.SUBSCRIPTION_COST_FIELD);
@@ -93,7 +99,29 @@ public class MainActivity extends AppCompatActivity {
             calcTotal();
             adapter.notifyDataSetChanged();
             saveInFile();
+        }
 
+        if (resultCode == Intent_Constants.INTENT_REQUEST_CODE_TWO) {
+            String name = data.getStringExtra(Intent_Constants.SUBSCRIPTION_NAME_FIELD_EDIT);
+            String date = data.getStringExtra(Intent_Constants.SUBSCRIPTION_DATE_FIELD_EDIT);
+            String cost = data.getStringExtra(Intent_Constants.SUBSCRIPTION_COST_FIELD_EDIT);
+            String comment = data.getStringExtra(Intent_Constants.SUBSCRIPTION_COMMENT_FIELD_EDIT);
+            int index = data.getIntExtra(Intent_Constants.SUBSCRIPTION_INDEX, -1);
+            Subscription sub = new Subscription(name, date, cost, comment);
+            subscriptions.remove(index);
+            subscriptions.add(sub);
+            calcTotal();
+            adapter.notifyDataSetChanged();
+            saveInFile();
+
+        }
+
+        if (resultCode == Intent_Constants.INTENT_DELETE_CODE) {
+            int index = data.getIntExtra(Intent_Constants.SUBSCRIPTION_INDEX, -1);
+            subscriptions.remove(index);
+            calcTotal();
+            adapter.notifyDataSetChanged();
+            saveInFile();
 
         }
     }
@@ -107,6 +135,24 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter<Subscription>(this, R.layout.list_item, subscriptions);
         listView.setAdapter(adapter);
+
+    }
+
+    private void clear() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME,
+                    Context.MODE_PRIVATE);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+
+            Gson gson = new Gson();
+            gson.toJson(new ArrayList<Subscription>(), out);
+            out.flush();
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException();
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
 
     }
 

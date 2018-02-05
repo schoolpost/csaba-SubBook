@@ -19,8 +19,7 @@ public class SubscriptionActivty extends AppCompatActivity {
         Button saveButton = (Button) findViewById(R.id.saveButton);
         Button deleteButton = (Button) findViewById(R.id.deleteButton);
 
-        Intent intent = getIntent();
-
+        final Intent intent = getIntent();
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,6 +44,8 @@ public class SubscriptionActivty extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                setResult(Intent_Constants.INTENT_CANCEL_CODE, intent);
+                finish();
             }
         });
 

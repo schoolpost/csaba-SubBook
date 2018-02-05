@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Mon Feb 05 14:27:40 MST 2018
+0.baseType=DIRECTORY
+0.base=/Users/Schoolpost/Documents/301/a1/csaba-SubBook/app/build/intermediates/transforms/dexMerger/debug/75
+0.path=classes.dex
+0.set=DEX
+count=1
